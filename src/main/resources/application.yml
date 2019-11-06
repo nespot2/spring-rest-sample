@@ -1,0 +1,27 @@
+server:
+  port: 9999
+
+
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
+
+
+api:
+  youtube:
+    key: AIzaSyCjqaEBSkEujs5CkmzByZhmaQHo7nTq4YE
+  read-time-out: 5000
+  connect-time-out: 30000
