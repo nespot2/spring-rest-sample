@@ -34,3 +34,5 @@ out/
 /http
 
 *.iml
+
+application-local.yml
