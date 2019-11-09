@@ -21,7 +21,5 @@ logging:
 
 
 api:
-  youtube:
-    key: AIzaSyCjqaEBSkEujs5CkmzByZhmaQHo7nTq4YE
   read-time-out: 5000
   connect-time-out: 30000

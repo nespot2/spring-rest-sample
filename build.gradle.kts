@@ -71,6 +71,7 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:3.7")
     implementation("com.h2database:h2")
     implementation("org.apache.httpcomponents:httpclient:4.5.10")
+    runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     compileOnly("org.projectlombok:lombok")
