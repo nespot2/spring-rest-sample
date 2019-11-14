@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable();
 
         http.csrf().disable();
+
     }
 
     @Bean
