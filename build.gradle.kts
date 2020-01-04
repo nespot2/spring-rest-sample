@@ -6,18 +6,21 @@ plugins {
     id("io.spring.dependency-management") version "1.0.8.RELEASE"
     java
     id("com.ewerk.gradle.plugins.querydsl") version "1.0.10"
-    id("org.asciidoctor.convert") version "1.5.3"
 }
 
 group = "com.nespot2"
 version = "0.0.1-SNAPSHOT"
+
+configure<JavaPluginConvention> {
+    sourceCompatibility = JavaVersion.VERSION_11
+}
 
 repositories {
     mavenCentral()
 }
 
 // query dsl
-val querydslSrcDir = "src/main/generated"
+val querydslSrcDir = "src-gen/main/java"
 
 querydsl {
     library = "com.querydsl:querydsl-apt"
@@ -38,29 +41,7 @@ sourceSets {
     getByName("main").java.srcDirs(listOf("src/main/java", querydslSrcDir))
 }
 
-
-// spring rest doc
-val snippetsDir by extra { file("build/generated-snippets") }
-
-tasks.test {
-    outputs.dir(snippetsDir)
-}
-
-tasks.asciidoctor {
-    inputs.dir(snippetsDir)
-    dependsOn(tasks.test) // added tasks. prefix
-}
-
-tasks.getByName<BootJar>("bootJar") {
-    dependsOn(tasks.asciidoctor)
-    from ("${buildDir}/asciidoc/html5") {
-        into("static/docs")
-    }
-}
-
 dependencies {
-    asciidoctor("org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.3.RELEASE")
-    testCompile("org.springframework.restdocs:spring-restdocs-mockmvc:2.0.3.RELEASE")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
@@ -69,7 +50,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-devtools")
     implementation("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
     implementation("org.apache.commons:commons-lang3:3.7")
-    implementation("com.h2database:h2")
     implementation("org.apache.httpcomponents:httpclient:4.5.10")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
 

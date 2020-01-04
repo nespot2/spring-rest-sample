@@ -33,4 +33,6 @@ out/
 
 /http
 
+/src-gen
+
 *.iml
